@@ -290,6 +290,23 @@ input[type="number"]::-webkit-inner-spin-button {
     color: #59aa29;
 }
 
+.stalkericon {
+    background-image: url(images/icons/sensor_stalker_off.png);
+    background-size: 41px;
+    background-position: -4px 1px;
+    background-repeat: no-repeat;
+    height: 30px;
+    margin-top: 3px;
+    width: 100%;
+    padding-top: 40px;
+    color: #818181;
+    text-align: center;
+}
+
+.stalkericon.active {
+    color: #59aa29;
+}
+
 .baroicon {
     background-image: url(images/icons/sensor_baro_off.png);
     background-size: 40px;
@@ -659,6 +676,18 @@ li.active .ic_servo {
 
 li.active .ic_gps {
     background-image: url(images/icons/cf_icon_gps_white.svg);
+}
+
+.ic_stalker {
+    background-image: url(images/icons/cf_icon_stalker_grey.svg);
+}
+
+.ic_stalker:hover {
+    background-image: url(images/icons/cf_icon_stalker_white.svg);
+}
+
+li.active .ic_stalker {
+    background-image: url(images/icons/cf_icon_stalker_white.svg);
 }
 
 .ic_led {

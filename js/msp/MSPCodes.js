@@ -110,6 +110,11 @@ var MSPCodes = {
     MSP_GPS_CONFIG:                 132,
     MSP_COMPASS_CONFIG:             133,
 
+    MSP_STALKER_CONFIG:             140,
+    MSP_SET_STALKER_CONFIG:         141,
+    MSP_STALKER_RAW_DATA:           142,
+    MSP_STALKER_UAV_DATA:           143,
+
     MSP_STATUS_EX:                  150,
 
     MSP_UID:                        160,

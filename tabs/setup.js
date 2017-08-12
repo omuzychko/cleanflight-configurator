@@ -162,7 +162,13 @@ TABS.setup.initialize = function (callback) {
             gpsLon_e = $('.gpsLon'),
             roll_e = $('dd.roll'),
             pitch_e = $('dd.pitch'),
-            heading_e = $('dd.heading');
+            heading_e = $('dd.heading'),
+            stalkerAzimuth_e  = $('.stalkerAzimuth'),
+            stalkerElevation_e = $('.stalkerElevation'),
+            stalkerHeadingAzimuth_e = $('.stalkerHeadingAzimuth'),
+            stalkerHeadingElevation_e = $('.stalkerHeadingElevation'),
+            stalkerAltitude_e = $('.stalkerAltitude'),
+            stalkerDistance_e = $('.stalkerDistance'); 
 
         function get_slow_data() {
             MSP.send_message(MSPCodes.MSP_STATUS);
@@ -193,6 +199,17 @@ TABS.setup.initialize = function (callback) {
                 self.renderModel();
                 self.updateInstruments();
             });
+
+            if (have_sensor(CONFIG.activeSensors, 'stalker')) {
+                MSP.send_message(MSPCodes.MSP_STALKER_UAV_DATA, false, false, function () {
+                    stalkerAzimuth_e.text((STALKER_DATA.azimuth*0.18/Math.PI).toFixed(2) + ' deg');
+                    stalkerElevation_e.text((STALKER_DATA.elevation*0.18/Math.PI).toFixed(2) + ' deg');
+                    stalkerHeadingAzimuth_e.text((STALKER_DATA.headingAzimuth*0.18/Math.PI).toFixed(2) + ' deg');
+                    stalkerHeadingElevation_e.text((STALKER_DATA.headingElevation*0.18/Math.PI).toFixed(2) + ' deg');
+                    stalkerAltitude_e.text((STALKER_DATA.altitude / 1000).toFixed(2) + ' m');
+                    stalkerDistance_e.text((STALKER_DATA.distance / 1000).toFixed(2) + ' m');
+                });
+            }
         }
 
         GUI.interval_add('setup_data_pull_fast', get_fast_data, 33, true); // 30 fps

@@ -190,6 +190,10 @@ li.active .ic_welcome {
     background-image: url(/images/cf/icons/sensor_sonar_on.png);
 }
 
+.stalkericon.active {
+    background-image: url(/images/cf/icons/sensor_stalker_on.png);
+}
+
 .tab-landing .content_wrapper {
     background-color: #436c2c;
 }

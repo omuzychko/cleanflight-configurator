@@ -30,6 +30,7 @@ var GUI_control = function () {
         'cli',
         'configuration',
         'gps',
+        'stalker',
         'led_strip',
         'logging',
         'onboard_logging',

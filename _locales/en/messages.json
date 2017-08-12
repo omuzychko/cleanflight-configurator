@@ -107,6 +107,9 @@
     "tabGPS": {
         "message": "GPS"
     },
+    "tabStalker": {
+        "message": "Stalker"
+    },
     "tabMotorTesting": {
         "message": "Motors"
     },
@@ -471,6 +474,9 @@
     "initialSetupGPSHead": {
         "message": "GPS"
     },
+    "initialSetupStalkerHead": {
+        "message": "Stalker"
+    },
     "initialSetupInstrumentsHead": {
         "message": "Instruments"
     },
@@ -533,6 +539,15 @@
     },
     "featureGPSTip": {
         "message": "Configure port scenario first"
+    },
+    "featureStalker": {
+        "message": "6-DOF optical sensor for short-distance \"follow me\""
+    },
+    "featureStalkerTip": {
+        "message": "Setup UART port first and verify data aquisition in Stalker tab, then setup in Modes tab to enable navigation from transmitter switch."
+    },
+    "featureFAILSAFE": {
+        "message": "Apply failsafe settings on RX signal loss"
     },
     "featureSONAR": {
         "message": "Sonar"
@@ -762,6 +777,18 @@
     "configurationGPSHelp": {
         "message": "<strong>Note:</strong> Remember to configure a Serial Port (via Ports tab) when using GPS feature."
     },
+     "configurationStalker": {
+        "message": "Stalker"
+    },
+    "configurationStalkerTargetDistance": {
+        "message": "Target Distance (mm)"
+    },
+    "configurationStalkerTargetDeadband": {
+        "message": "Target Deadband"
+    },
+    "configurationStalkerHelp": {
+        "message": "<strong>Note:</strong> Remember to select a Serial Port (via Ports tab) when using Stalker feature."
+    },
     "configurationSerialRX": {
         "message": "Serial Receiver Provider"
     },
@@ -789,6 +816,9 @@
     },
     "portsPeripherals": {
         "message": "Peripherals"
+    },
+    "portsStalker": {
+        "message": "Stalker"
     },
     "portsHelp": {
         "message": "<strong>Note:</strong> not all combinations are valid.  When the flight controller firmware detects this the serial port configuration will be reset."
@@ -855,6 +885,9 @@
     },
     "portsFunction_IRC_TRAMP": {
         "message": "IRC Tramp"
+    },
+    "portsFunction_STALKER": {
+        "message": "Stalker"
     },
     "pidTuningUpgradeFirmwareToChangePidController": {
         "message": "<span style=\"color: red\">Changing PID controller disabled - you can change it via the CLI.</span>  You have firmware with API version <span style=\"color: red\">$1</span>, but this functionality requires requires <span class=\"message-positive\">$2</span>."
@@ -1368,6 +1401,25 @@
     "gpsSignalStr": {
         "message": "Signal Strength"
     },
+    
+    "stalkerAzimuth": {
+        "message": "Azimuth to Traget:"
+    },
+    "stalkerElevation": {
+        "message": "Elevation to Target:"
+    },
+    "stalkerHeadingAzimuth": {
+        "message": "Targets Heading Azimuth:"
+    },
+    "stalkerHeadingElevation": {
+        "message": "Targets Heading Elevation:"
+    },
+    "stalkerAltitude": {
+        "message": "Altitude from Target:"
+    },
+    "stalkerDistance": {
+        "message": "Distance to Target:"
+    },
 
     "motorsMaster": {
         "message": "Master"
@@ -1779,6 +1831,9 @@
     },
     "pidTuningGps": {
         "message": "GPS Navigation"
+    },
+    "pidTuningStalker": {
+        "message": "Stalker Tracking"
     },
     "pidTuningStrength": {
         "message": "Strength"

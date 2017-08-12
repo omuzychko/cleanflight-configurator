@@ -139,9 +139,18 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
     }
 
     function load_rx_config() {
-        var next_callback = load_html;
+        var next_callback = load_stalker_config;
         if (semver.gte(CONFIG.apiVersion, "1.31.0")) {
             MSP.send_message(MSPCodes.MSP_RX_CONFIG, false, false, next_callback);
+        } else {
+            next_callback();
+        }
+    }
+
+    function load_stalker_config() {
+        var next_callback = load_html;
+        if (semver.gte(CONFIG.apiVersion, "1.32.0")) {
+            MSP.send_message(MSPCodes.MSP_STALKER_CONFIG, false, false, next_callback);
         } else {
             next_callback();
         }
@@ -529,6 +538,15 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             $('input[name="3ddeadbandhigh"]').val(MOTOR_3D_CONFIG.deadband3d_high);
             $('input[name="3dneutral"]').val(MOTOR_3D_CONFIG.neutral);
         }
+        
+        //fill Stalker
+        if (semver.lt(CONFIG.apiVersion, "1.22.0")) {
+            $('.tab-configuration .stalker').hide();
+        } else {
+            $('input[name="stalkerTargetDistance"]').val(STALKER_CONFIG.targetDistance);
+            $('input[name="stalkerTargetDeadband"]').val(STALKER_CONFIG.targetDeadband);
+        }
+
 
         // UI hooks
         function checkShowDisarmDelay() {
@@ -631,6 +649,9 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
                 ARMING_CONFIG.auto_disarm_delay = parseInt($('input[name="autodisarmdelay"]').val());
                 ARMING_CONFIG.disarm_kill_switch = $('input[id="disarmkillswitch"]').is(':checked') ? 1 : 0;
             }
+
+            STALKER_CONFIG.targetDistance = parseInt($('input[name="stalkerTargetDistance"]').val());
+            STALKER_CONFIG.targetDeadband = parseInt($('input[name="stalkerTargetDeadband"]').val());
 
             MOTOR_CONFIG.minthrottle = parseInt($('input[name="minthrottle"]').val());
             MOTOR_CONFIG.maxthrottle = parseInt($('input[name="maxthrottle"]').val());
@@ -766,12 +787,21 @@ TABS.configuration.initialize = function (callback, scrollPosition) {
             }
 
             function save_rx_config() {
-                var next_callback = save_to_eeprom;
+                var next_callback = save_stalker_config;
                 if (semver.gte(CONFIG.apiVersion, "1.20.0")) {
                     MSP.send_message(MSPCodes.MSP_SET_RX_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_RX_CONFIG), false, next_callback);
                 } else {
                     next_callback();
                 }
+            }
+
+            function save_stalker_config() {
+                var next_callback = save_to_eeprom;
+                if(semver.gte(CONFIG.apiVersion, "1.32.0")) {
+                   MSP.send_message(MSPCodes.MSP_SET_STALKER_CONFIG, mspHelper.crunch(MSPCodes.MSP_SET_STALKER_CONFIG), false, next_callback);
+                } else {
+                   next_callback();
+                }     
             }
 
             function save_to_eeprom() {

@@ -183,6 +183,9 @@ $(document).ready(function () {
                     case 'gps':
                         TABS.gps.initialize(content_ready);
                         break;
+                    case 'stalker':
+                        TABS.stalker.initialize(content_ready);
+                        break;
                     case 'motors':
                         TABS.motors.initialize(content_ready);
                         break;
@@ -416,6 +419,12 @@ function updateTabList(features) {
         $('#tabs ul.mode-connected li.tab_gps').show();
     } else {
         $('#tabs ul.mode-connected li.tab_gps').hide();
+    }
+
+    if (features.isEnabled('STALKER')) {
+        $('#tabs ul.mode-connected li.tab_stalker').show();
+    } else {
+        $('#tabs ul.mode-connected li.tab_stalker').hide();
     }
 
     if (features.isEnabled('LED_STRIP')) {

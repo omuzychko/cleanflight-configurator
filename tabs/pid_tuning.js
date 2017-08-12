@@ -184,6 +184,66 @@ TABS.pid_tuning.initialize = function (callback) {
             }
         });
 
+        i = 0;
+        $('.pid_tuning .ST_AZM input').each(function () {
+            switch (i) {
+                case 0:
+                    $(this).val(PIDs[10][i++]);
+                    break;
+                case 1:
+                    $(this).val(PIDs[10][i++]);
+                    break;
+                case 2:
+                    $(this).val(PIDs[10][i++]);
+                    break;
+            }
+        });
+
+        i = 0;
+        $('.pid_tuning .ST_ELV input').each(function () {
+            switch (i) {
+                case 0:
+                    $(this).val(PIDs[11][i++]);
+                    break;
+                case 1:
+                    $(this).val(PIDs[11][i++]);
+                    break;
+                case 2:
+                    $(this).val(PIDs[11][i++]);
+                    break;
+            }
+        });
+
+        i = 0;
+        $('.pid_tuning .ST_DST input').each(function () {
+            switch (i) {
+                case 0:
+                    $(this).val(PIDs[12][i++]);
+                    break;
+                case 1:
+                    $(this).val(PIDs[12][i++]);
+                    break;
+                case 2:
+                    $(this).val(PIDs[12][i++]);
+                    break;
+            }
+        });
+
+        i = 0;
+        $('.pid_tuning .ST_HDN input').each(function () {
+            switch (i) {
+                case 0:
+                    $(this).val(PIDs[13][i++]);
+                    break;
+                case 1:
+                    $(this).val(PIDs[13][i++]);
+                    break;
+                case 2:
+                    $(this).val(PIDs[13][i++]);
+                    break;
+            }
+        });
+
         // Fill in data from RC_tuning object
         $('.pid_tuning input[name="rc_rate"]').val(RC_tuning.RC_RATE.toFixed(2));
         $('.pid_tuning input[name="roll_pitch_rate"]').val(RC_tuning.roll_pitch_rate.toFixed(2));
@@ -319,6 +379,26 @@ TABS.pid_tuning.initialize = function (callback) {
             PIDs[8][i++] = parseFloat($(this).val());
         });
 
+        i = 0;
+        $('div.pid_tuning tr.ST_AZM input').each(function () {
+            PIDs[10][i++] = parseFloat($(this).val());
+        });
+
+        i = 0;
+        $('div.pid_tuning tr.ST_ELV input').each(function () {
+            PIDs[11][i++] = parseFloat($(this).val());
+        });
+
+        i = 0;
+        $('div.pid_tuning tr.ST_DST input').each(function () {
+            PIDs[12][i++] = parseFloat($(this).val());
+        });
+
+        i = 0;
+        $('div.pid_tuning tr.ST_HDN input').each(function () {
+            PIDs[13][i++] = parseFloat($(this).val());
+        });
+
         // catch RC_tuning changes
         RC_tuning.RC_RATE = parseFloat($('.pid_tuning input[name="rc_rate"]').val());
         RC_tuning.roll_pitch_rate = parseFloat($('.pid_tuning input[name="roll_pitch_rate"]').val());
@@ -397,6 +477,10 @@ TABS.pid_tuning.initialize = function (callback) {
         }
         if (FEATURE_CONFIG.features.isEnabled('GPS')) {
             $('#pid_gps').show();
+            showTitle = true;
+        }
+        if (FEATURE_CONFIG.features.isEnabled('STALKER')) {
+            $('#pid_stalker').show();
             showTitle = true;
         }
 

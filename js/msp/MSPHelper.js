@@ -23,7 +23,8 @@ function MspHelper () {
     'ESC_SENSOR': 10,
     'TBS_SMARTAUDIO': 11,
     'TELEMETRY_IBUS': 12,
-    'IRC_TRAMP': 13
+    'IRC_TRAMP': 13,
+    'STALKER': 14
   };
 }
 
@@ -333,6 +334,43 @@ MspHelper.prototype.process_data = function(dataHandler) {
                     GPS_CONFIG.auto_config = data.readU8();
                     GPS_CONFIG.auto_baud = data.readU8();
                 }
+                break;
+            case MSPCodes.MSP_STALKER_CONFIG:
+                STALKER_CONFIG.targetDistance = data.readU16();
+                STALKER_CONFIG.targetDeadband = data.readU8();
+                break;        
+            case MSPCodes.MSP_SET_STALKER_CONFIG:
+                console.log('Stalker Configuration saved');
+                break;
+            case MSPCodes.MSP_STALKER_RAW_DATA:
+                STALKER_DATA.src[0].a = data.getFloat32(0, 1);
+                STALKER_DATA.src[0].b = data.getFloat32(4, 1);
+                STALKER_DATA.src[0].c = data.getFloat32(8, 1);
+                STALKER_DATA.src[0].x = data.getFloat32(12, 1);
+                STALKER_DATA.src[0].y = data.getFloat32(16, 1);
+                STALKER_DATA.src[0].z = data.getFloat32(20, 1);
+                
+                STALKER_DATA.src[1].a = data.getFloat32(24, 1);
+                STALKER_DATA.src[1].b = data.getFloat32(28, 1);
+                STALKER_DATA.src[1].c = data.getFloat32(32, 1);
+                STALKER_DATA.src[1].x = data.getFloat32(36, 1);
+                STALKER_DATA.src[1].y = data.getFloat32(40, 1);
+                STALKER_DATA.src[1].z = data.getFloat32(44, 1);
+                
+                STALKER_DATA.src[2].a = data.getFloat32(48, 1);
+                STALKER_DATA.src[2].b = data.getFloat32(52, 1);
+                STALKER_DATA.src[2].c = data.getFloat32(56, 1);
+                STALKER_DATA.src[2].x = data.getFloat32(60, 1);
+                STALKER_DATA.src[2].y = data.getFloat32(64, 1);
+                STALKER_DATA.src[2].z = data.getFloat32(68, 1);
+                break;
+            case MSPCodes.MSP_STALKER_UAV_DATA:
+                STALKER_DATA.azimuth            = data.getInt16(0, 1);
+                STALKER_DATA.elevation          = data.getInt16(2, 1);
+                STALKER_DATA.headingAzimuth     = data.getInt16(4, 1);
+                STALKER_DATA.headingElevation   = data.getInt16(6, 1);
+                STALKER_DATA.altitude           = data.getInt16(8, 1);
+                STALKER_DATA.distance           = data.getInt16(10, 1);
                 break;
             case MSPCodes.MSP_RSSI_CONFIG:
                 RSSI_CONFIG.channel = data.readU8();
@@ -1229,6 +1267,10 @@ MspHelper.prototype.crunch = function(code) {
             break;
         case MSPCodes.MSP_SET_COMPASS_CONFIG:
             buffer.push16(Math.round(COMPASS_CONFIG.mag_declination * 100));
+            break;
+        case MSPCodes.MSP_SET_STALKER_CONFIG:
+            buffer.push16(STALKER_CONFIG.targetDistance);
+            buffer.push8(STALKER_CONFIG.targetDeadband);
             break;
         case MSPCodes.MSP_SET_RSSI_CONFIG:
             buffer.push8(RSSI_CONFIG.channel);

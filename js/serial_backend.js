@@ -447,6 +447,14 @@ function sensor_status(sensors_detected) {
         $('.sonar', e_sensor_status).removeClass('on');
         $('.sonaricon', e_sensor_status).removeClass('active');
     }
+
+    if (have_sensor(sensors_detected, 'stalker')) {
+        $('.stalker', e_sensor_status).addClass('on');
+        $('.stalkericon', e_sensor_status).addClass('active');
+    } else {
+        $('.stalker', e_sensor_status).removeClass('on');
+        $('.stalkericon', e_sensor_status).removeClass('active');
+    }
 }
 
 function have_sensor(sensors_detected, sensor_code) {
@@ -461,6 +469,8 @@ function have_sensor(sensors_detected, sensor_code) {
             return bit_check(sensors_detected, 3);
         case 'sonar':
             return bit_check(sensors_detected, 4);
+        case 'stalker':
+            return bit_check(sensors_detected, 5);
     }
     return false;
 }

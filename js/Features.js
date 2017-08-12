@@ -82,6 +82,12 @@ var Features = function (config) {
                 {bit: 27, group: 'other', name: 'ESC_SENSOR'}
             )
         }
+
+        if (semver.gte(CONFIG.apiVersion, "1.32.0")) {
+            features.push(
+                {bit: 30, group: 'stalker', name: 'STALKER', haveTip: true}
+            )
+        }
     }
 
     self._features = features;

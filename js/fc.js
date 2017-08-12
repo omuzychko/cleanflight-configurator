@@ -25,6 +25,8 @@ var SENSOR_DATA;
 var MOTOR_DATA;
 var SERVO_DATA;
 var GPS_DATA;
+var STALKER_CONFIG;
+var STALKER_DATA;
 var ANALOG;
 var VOLTAGE_METERS;
 var VOLTAGE_METER_CONFIGS;
@@ -101,8 +103,8 @@ var FC = {
         };
 
         PID_names =                     [];
-        PIDs = new Array(10);
-        for (var i = 0; i < 10; i++) {
+        PIDs = new Array(14);
+        for (var i = 0; i <14; i++) {
             PIDs[i] = new Array(3);
         }
 
@@ -148,7 +150,12 @@ var FC = {
             gpsPassthroughBaudRate:     0,
             cliBaudRate:                0,
         };
-
+        
+        STALKER_CONFIG = {
+            targetDistance:  2000,   // desired distance from drone to the target when locked.
+            targetDeadband:  100       
+        };
+        
         SENSOR_DATA = {
             gyroscope:                  [0, 0, 0],
             accelerometer:              [0, 0, 0],
@@ -179,7 +186,20 @@ var FC = {
             quality:                    [],
             cno:                        []
         };
-
+        
+        STALKER_DATA = {
+            src: [  {a:0, b:0, c:0, x:0, y:0, z:0},
+                    {a:0, b:0, c:0, x:0, y:0, z:0},
+                    {a:0, b:0, c:0, x:0, y:0, z:0}  ],
+            azimuth:            0,
+            elevation:          0,
+            headingAzimuth:     0,
+            headingElevation:   0,
+            altitude:           0,
+            distance:           0
+            
+        };
+        
         ANALOG = {
             voltage:                    0,
             mAhdrawn:                   0,

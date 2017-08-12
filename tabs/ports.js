@@ -43,6 +43,11 @@ TABS.ports.initialize = function (callback, scrollPosition) {
         functionRules.push({ name: 'TELEMETRY_IBUS', groups: ['telemetry'], maxPorts: 1 });
     }
 
+    if (semver.gte(CONFIG.apiVersion, "1.32.0")) {
+        var stalkerFunctionRule = {name: 'STALKER', groups: ['sensors'], maxPorts: 1};
+        functionRules.push(stalkerFunctionRule);
+    }
+
     for (var i = 0; i < functionRules.length; i++) {
         functionRules[i].displayName = chrome.i18n.getMessage('portsFunction_' + functionRules[i].name);
     }
